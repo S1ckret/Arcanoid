@@ -4,7 +4,7 @@
 
 #include "../Objects/Body.h"
 #include "../Objects/Rectangle.h"
-
+#include "../Objects/Level.h"
 
 class StatePlaying 
 	: public StateBase {
@@ -23,4 +23,6 @@ private:
 	sf::View m_view;
 	Body *body;
 	Rectangle rect;
+	
+	Level lvl;
 };

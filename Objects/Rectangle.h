@@ -9,8 +9,10 @@ public:
 	Rectangle(float h_w, float h_h, sf::Vector2f pos);
 	
 	void setPosition(float x, float y);
-	void setRect(float h_w, float h_h);
+	void setSize(float h_w, float h_h);
 	void setColor(sf::Color cl);
+	
+	const Shape& getShape();
 private:
 	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 	

@@ -17,9 +17,11 @@ StatePlaying::StatePlaying(Game& game) : StateBase(game) {
 	
 	body->setColor(sf::Color::Blue);
 	
-	rect.setRect(50.f, 50.f);
-	rect.setPosition(200.f, 200.f);
+	rect.setSize(50.f, 50.f);
+	rect.setPosition(0.f, 200.f);
 	rect.setColor(sf::Color::Red);
+	
+	lvl.load("lvl/lvl.txt");
 }
 
 StatePlaying::~StatePlaying() {
@@ -38,6 +40,7 @@ void StatePlaying::render() {
 	m_window->setView(m_view);
 	m_window->draw(*body);
 	m_window->draw(rect);
+	m_window->draw(lvl);
 }
 
 void StatePlaying::debugRender() {

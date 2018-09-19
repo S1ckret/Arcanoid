@@ -9,7 +9,7 @@ Rectangle::Rectangle() {
 
 Rectangle::Rectangle(float h_w, float h_h, sf::Vector2f pos) {
 	m_shape.position = pos;
-	setRect(h_w, h_h);
+	setSize(h_w, h_h);
 }
 
 void Rectangle::setPosition(float x, float y) {
@@ -21,7 +21,7 @@ void Rectangle::setPosition(float x, float y) {
 	}
 }
 
-void Rectangle::setRect(float h_w, float h_h) {
+void Rectangle::setSize(float h_w, float h_h) {
 	std::vector<sf::Vertex>().swap(m_shape.local);
 	std::vector<sf::Vertex>().swap(m_shape.world);
 	
@@ -35,10 +35,15 @@ void Rectangle::setRect(float h_w, float h_h) {
 	}
 }
 
+void Rectangle::setColor(sf::Color cl) {
+	m_shape.setColor(cl);
+}
+
+const Shape& Rectangle::getShape() {
+	return m_shape;
+}
+
 void Rectangle::draw(sf::RenderTarget& target, sf::RenderStates states) const {
 	target.draw(&m_shape.world[0], m_shape.world.size(), sf::Quads);
 }
 
-void Rectangle::setColor(sf::Color cl) {
-	m_shape.setColor(cl);
-}

@@ -3,8 +3,6 @@
 
 
 Body::Body() {
-	font.loadFromFile("res/BKANT.TTF");
-	text.setFont(font);
 }
 
 Body::Body(Shape& sh) {
@@ -14,11 +12,6 @@ Body::Body(Shape& sh) {
 		m_shape.world[i] = sf::Vertex(m_shape.local[i].position + m_shape.position); // + position
 	}
 	
-	font.loadFromFile("res/BKANT.TTF");
-	text.setFont(font);
-	text.setPosition(100.f, 100.f);
-	text.setCharacterSize(24);
-	text.setString(std::to_string(m_shape.local.size()) + "   " + std::to_string(m_shape.world.size()));
 }
 
 
@@ -61,7 +54,6 @@ void Body::update(float d_time) {
 
 void Body::draw(sf::RenderTarget& target, sf::RenderStates states) const {
 	target.draw(&m_shape.world[0], m_shape.world.size(), sf::LineStrip);
-	target.draw(text);
 }
 
 

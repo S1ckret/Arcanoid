@@ -30,7 +30,4 @@ private:
 private:
 	sf::Vector2f m_vel, m_acc;
 	Shape m_shape;
-	
-	sf::Font font;
-	sf::Text text;
 };
