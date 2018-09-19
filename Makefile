@@ -1,2 +1,2 @@
 all: 
-	g++ main.cpp Game.cpp States/StatePlaying.cpp Objects/Body.cpp Objects/Rectangle.cpp -o Arcanoid.exe -DSFML_STATIC -I D:\000_myFiles\03_Programming\Libraries\SFML-2.4.2-R-S-MinGW\include  -L D:\000_myFiles\03_Programming\Libraries\SFML-2.4.2-R-S-MinGW\lib -lsfml-graphics-s -lsfml-window-s -lsfml-system-s -lopengl32 -lwinmm -lgdi32 -lfreetype -ljpeg
+	g++ main.cpp Game.cpp States/StatePlaying.cpp Objects/Body.cpp Objects/Rectangle.cpp Objects/Shape.cpp -o Arcanoid.exe -DSFML_STATIC -I D:\000_myFiles\03_Programming\Libraries\SFML-2.4.2-R-S-MinGW\include  -L D:\000_myFiles\03_Programming\Libraries\SFML-2.4.2-R-S-MinGW\lib -lsfml-graphics-s -lsfml-window-s -lsfml-system-s -lopengl32 -lwinmm -lgdi32 -lfreetype -ljpeg

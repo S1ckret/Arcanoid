@@ -32,6 +32,10 @@ void Body::setBorderBox(sf::VertexArray& va) {
 	}
 }
 
+void Body::setColor(sf::Color cl) {
+	m_shape.setColor(cl);
+}
+
 void Body::setTexture(sf::Texture& tx) {
 	
 }

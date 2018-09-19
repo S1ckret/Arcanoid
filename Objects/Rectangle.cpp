@@ -38,3 +38,7 @@ void Rectangle::setRect(float h_w, float h_h) {
 void Rectangle::draw(sf::RenderTarget& target, sf::RenderStates states) const {
 	target.draw(&m_shape.world[0], m_shape.world.size(), sf::Quads);
 }
+
+void Rectangle::setColor(sf::Color cl) {
+	m_shape.setColor(cl);
+}

@@ -14,6 +14,8 @@ public:
 	
 	void setBorderBox(sf::VertexArray& va);
 	
+	void setColor(sf::Color cl);
+	
 	void setTexture(sf::Texture& tx);
 	void setTextureBox(sf::VertexArray& va);
 	

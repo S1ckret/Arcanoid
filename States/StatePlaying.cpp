@@ -15,8 +15,11 @@ StatePlaying::StatePlaying(Game& game) : StateBase(game) {
 	
 	body = new Body(shape);
 	
+	body->setColor(sf::Color::Blue);
+	
 	rect.setRect(50.f, 50.f);
 	rect.setPosition(200.f, 200.f);
+	rect.setColor(sf::Color::Red);
 }
 
 StatePlaying::~StatePlaying() {

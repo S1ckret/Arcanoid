@@ -10,6 +10,7 @@ public:
 	
 	void setPosition(float x, float y);
 	void setRect(float h_w, float h_h);
+	void setColor(sf::Color cl);
 private:
 	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 	
