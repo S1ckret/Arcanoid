@@ -39,7 +39,7 @@ void Rectangle::setColor(sf::Color cl) {
 	m_shape.setColor(cl);
 }
 
-const Shape& Rectangle::getShape() {
+const Shape& Rectangle::getShape() const{
 	return m_shape;
 }
 

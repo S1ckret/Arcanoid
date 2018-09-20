@@ -7,6 +7,7 @@
 #include "SFML/Graphics.hpp"
 
 #include "Brick.h"
+#include "Ball.h"
 
 class Level : public sf::Drawable{
 public:
@@ -15,6 +16,7 @@ public:
 	~Level();
 	
 	void load(std::string filename);
+	void setWindow(sf::RenderWindow* win);
 	
 	void handleInput();
 	void update(float d_time);
@@ -24,7 +26,10 @@ private:
 	// loadPlayerCfg();
 	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 private:
+	sf::RenderWindow* m_win;
+
 	std::vector<Brick* > m_bricks;
+	Ball m_ball;
 	// Player
 	// Ball
 };

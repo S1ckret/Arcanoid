@@ -36,12 +36,22 @@ void Level::load(std::string filename) {
 	in.close();
 	out.close();
 }
+
+void Level::setWindow(sf::RenderWindow* win) {
+	m_win = win;
+	m_ball.setWindow(m_win);
+}
 	
 void Level::handleInput() {
 	
 }
 
 void Level::update(float d_time) {
+	for (int i = 0; i < m_bricks.size(); i++) {
+		m_ball.testCollision(m_bricks[i]->getRectangle().getShape());
+	}
+	m_ball.update(d_time);
+//	m_ball.testCollision(m_bricks[0]->getRectangle().getShape());
 	
 }
 
@@ -53,4 +63,5 @@ void Level::draw(sf::RenderTarget& target, sf::RenderStates states) const {
 	for (int i = 0; i < m_bricks.size(); i++) {
 		target.draw(*m_bricks[i]);
 	}
+	target.draw(m_ball);
 }

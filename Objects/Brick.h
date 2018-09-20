@@ -13,8 +13,12 @@ public:
 	void setSize(float h_w, float h_h);
 	void setPosition(float x, float y);
 	
-	const Rectangle& getRectangle();
+	void minusLife();
+	
+	const Rectangle& getRectangle() const;
+	
 private:
+	void updateColor();
 	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 	
 private:

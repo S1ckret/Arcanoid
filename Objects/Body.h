@@ -13,6 +13,8 @@ public:
 	~Body();
 	
 	void setBorderBox(sf::VertexArray& va);
+	void setPosition(float x, float y);
+	
 	
 	void setColor(sf::Color cl);
 	
@@ -21,6 +23,7 @@ public:
 	
 	void update(float d_time);
 	
+	const Shape& getShape() const;
 	//const sf::Vector2f& getPosition() const;
 	//const sf::VertexArray& getVertexPosition() const;
 	
@@ -28,6 +31,7 @@ private:
 	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 	
 private:
+	friend class Ball;
 	sf::Vector2f m_vel, m_acc;
 	Shape m_shape;
 };

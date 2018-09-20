@@ -12,7 +12,7 @@ public:
 	void setSize(float h_w, float h_h);
 	void setColor(sf::Color cl);
 	
-	const Shape& getShape();
+	const Shape& getShape() const;
 private:
 	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 	
