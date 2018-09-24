@@ -16,7 +16,7 @@ public:
 //	void tieToPlayer(Player& pl);
 	
 	void update(float d_time);
-	void testCollision(const Shape& sh);
+	bool testCollision(const Shape& sh);
 private:
 	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 	

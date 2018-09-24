@@ -48,7 +48,11 @@ void Level::handleInput() {
 
 void Level::update(float d_time) {
 	for (int i = 0; i < m_bricks.size(); i++) {
-		m_ball.testCollision(m_bricks[i]->getRectangle().getShape());
+		if (m_bricks[i]->isAlive()) {
+			if (m_ball.testCollision(m_bricks[i]->getRectangle().getShape())) {
+				m_bricks[i]->minusLife();
+			}
+		}
 	}
 	m_ball.update(d_time);
 //	m_ball.testCollision(m_bricks[0]->getRectangle().getShape());

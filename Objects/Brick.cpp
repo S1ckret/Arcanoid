@@ -1,10 +1,13 @@
 #include "Brick.h"
 
-Brick::Brick() {}
+Brick::Brick() {
+	m_alive = true;
+}
 
 Brick::Brick(float h_w, float h_h, sf::Vector2f pos, int lifes) {
 	setPosition(pos.x, pos.y);
 	setSize(h_w, h_h);
+	m_alive = true;
 	m_life = lifes;
 	updateColor();
 }
@@ -20,12 +23,26 @@ void Brick::setPosition(float x, float y) {
 	m_rect.setPosition(x, y);
 }
 
+void Brick::minusLife() {
+	m_life--;
+	if (m_life < 1) {
+		m_alive = false;
+	}
+	updateColor();
+}
+
 const Rectangle& Brick::getRectangle() const {
 	return m_rect;
 }
 
+bool Brick::isAlive() {
+	return m_alive;
+}
+
 void Brick::updateColor() {
 	switch (m_life) {
+		case 0: m_rect.setPosition(-1000.f, -1000.f);
+			break;
 		case 1: m_rect.setColor(sf::Color(255, 0, 0));
 			break;
 		case 2: m_rect.setColor(sf::Color(255, 165, 0));

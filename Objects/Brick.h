@@ -16,6 +16,7 @@ public:
 	void minusLife();
 	
 	const Rectangle& getRectangle() const;
+	bool isAlive();
 	
 private:
 	void updateColor();
@@ -24,5 +25,6 @@ private:
 private:
 	Rectangle m_rect;
 	int m_life;
+	bool m_alive;
 	
 };

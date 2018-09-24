@@ -46,8 +46,8 @@ void Body::setTextureBox(sf::VertexArray& va) {
 }
 
 void Body::update(float d_time) {
+	m_d_time = d_time;
 	m_vel += m_acc * d_time;
-	
 	m_shape.position += m_vel * d_time;
 	if (!m_shape.local.empty()) {
 		for (ui i = 0; i < m_shape.local.size(); i++) {
@@ -58,6 +58,10 @@ void Body::update(float d_time) {
 
 void Body::draw(sf::RenderTarget& target, sf::RenderStates states) const {
 	target.draw(&m_shape.world[0], m_shape.world.size(), sf::Quads);
+}
+
+sf::Vector2f Body::getVelocity() {
+	return m_vel * m_d_time;
 }
 
 const Shape& Body::getShape() const {

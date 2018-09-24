@@ -31,8 +31,13 @@ void Ball::update(float d_time) {
 	m_body.update(d_time);
 }
 
-void Ball::testCollision(const Shape& sh) {
-	const Shape& ball = m_body.getShape();
+bool Ball::testCollision(const Shape& sh) {
+	
+	Shape ball = m_body.getShape();
+	ball.position += m_body.getVelocity();
+	for (int i = 0; i < ball.world.size(); i++) {
+		ball.world[i].position += m_body.getVelocity();
+	}
 	
 	const sf::Vector2f half_sh = (sh.world[2].position - sh.world[0].position) * 0.5f;
 	const sf::Vector2f half_ball = (ball.world[2].position - ball.world[0].position) * 0.5f;
@@ -40,13 +45,13 @@ void Ball::testCollision(const Shape& sh) {
 	const float dx = sh.position.x - ball.position.x;
 	const float px = (half_ball.x + half_sh.x) - abs(dx);
 	if (px <= 0.f) {
-		return;
+		return false;
 	}
 	
 	const float dy = sh.position.y - ball.position.y;
 	const float py = (half_ball.y + half_sh.y) - abs(dy);
 	if (py <= 0.f) {
-		return;
+		return false;
 	}
 	
 	text.setString("Half shape: " + std::to_string(half_ball.x) + " " + std::to_string(half_ball.y) + "\n"
@@ -59,11 +64,8 @@ void Ball::testCollision(const Shape& sh) {
 	}
 	else {
 		m_body.m_vel = sf::Vector2f(m_body.m_vel.x, -m_body.m_vel.y);
-	}
-	
-	
-	
-	
+	}	
+	return true;
 }
 
 void Ball::draw(sf::RenderTarget& target, sf::RenderStates states) const {

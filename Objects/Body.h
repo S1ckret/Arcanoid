@@ -23,6 +23,8 @@ public:
 	
 	void update(float d_time);
 	
+	sf::Vector2f getVelocity();
+	
 	const Shape& getShape() const;
 	//const sf::Vector2f& getPosition() const;
 	//const sf::VertexArray& getVertexPosition() const;
@@ -33,5 +35,6 @@ private:
 private:
 	friend class Ball;
 	sf::Vector2f m_vel, m_acc;
+	float m_d_time;
 	Shape m_shape;
 };
