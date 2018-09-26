@@ -38,6 +38,10 @@ void Body::setColor(sf::Color cl) {
 	m_shape.setColor(cl);
 }
 
+void Body::setAcceleration(sf::Vector2f acc) {
+	m_acc = acc;
+}
+
 void Body::setTexture(sf::Texture& tx) {
 	
 }

@@ -13,11 +13,6 @@ Player::Player() {
 	m_body.setBorderBox(rect);
 	m_body.setColor(sf::Color::Magenta);
 	m_body.setPosition(500.f, 950.f);
-	
-	font.loadFromFile("res/BKANT.TTF");
-	text.setFont(font);
-	text.setPosition(100.f, 500.f);
-
 }
 
 Player::~Player() {
@@ -62,11 +57,6 @@ void Player::update(float d_time) {
 	} else if (m_body.m_vel.x < -m_max_vel) {
 		m_body.m_vel.x = -m_max_vel;
 	}
-	
-	text.setString( "Velocity: " + std::to_string(m_body.m_vel.x) + "\n"
-		+ "Acceleration: " + std::to_string(m_body.m_acc.x) + "\n");
-	
-
 }
 
 void Player::handleEvent(sf::Event& event) {

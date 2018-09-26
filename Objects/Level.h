@@ -24,7 +24,6 @@ public:
 	void handleEvent(sf::Event event);
 	
 private:
-	// loadPlayerCfg();
 	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 private:
 	sf::View* m_view;
@@ -32,4 +31,10 @@ private:
 	std::vector<Brick* > m_bricks;
 	Ball m_ball;
 	Player m_player;
+	
+	bool m_win;
+	
+	sf::Font m_font;
+	sf::Text m_win_text;
+	
 };

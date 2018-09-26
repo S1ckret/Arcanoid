@@ -15,8 +15,8 @@ public:
 	void setBorderBox(sf::VertexArray& va);
 	void setPosition(float x, float y);
 	void setPosition(sf::Vector2f pos);
-	
 	void setColor(sf::Color cl);
+	void setAcceleration(sf::Vector2f acc);
 	
 	void setTexture(sf::Texture& tx);
 	void setTextureBox(sf::VertexArray& va);
