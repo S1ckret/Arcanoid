@@ -1,34 +1,53 @@
 #include "Ball.h"
 
 Ball::Ball() {
-	m_body.setPosition(550.f, 600.f);
+	m_tied = true;
 	
 	sf::VertexArray box(sf::Quads, 4);
-	box[0].position = sf::Vector2f(-10.f, -10.f);
-	box[1].position = sf::Vector2f(10.f, -10.f);
-	box[2].position = sf::Vector2f(10.f, 10.f);
-	box[3].position = sf::Vector2f(-10.f, 10.f);
+	box[0].position = sf::Vector2f(-half_ball.x, -half_ball.y);
+	box[1].position = sf::Vector2f(half_ball.x, -half_ball.y);
+	box[2].position = sf::Vector2f(half_ball.x, half_ball.y);
+	box[3].position = sf::Vector2f(-half_ball.x, half_ball.y);
 	m_body.setBorderBox(box);
 	
-	m_body.m_vel = sf::Vector2f(150.f, -150.f);
+	m_body.m_vel = sf::Vector2f(0.f, 0.f);
 	m_body.m_acc = sf::Vector2f(0.f, 0.f);
 	
-	font.loadFromFile("res/BKANT.TTF");
-	text.setFont(font);
-	text.setPosition(100.f, 700.f);
 }
 
 Ball::~Ball() {
 	
 }
 
-void Ball::setWindow(sf::RenderWindow* win) {
-	m_win = win;
+void Ball::setView(sf::View* view) {
+	m_view = view;
+}
+
+void Ball::setPlayer(Player* pl) {
+	m_player = pl;
+}
+
+void Ball::handleInput() {
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
+		if (m_tied) {
+			if (m_player->getVelocity().x > 0.f) {
+				m_body.m_vel = sf::Vector2f(300.f, -300.f);
+			}
+			else {
+				m_body.m_vel = sf::Vector2f(-300.f, -300.f);
+			}
+			m_tied = 0;
+		}
+	}
 }
 
 void Ball::update(float d_time) {
-//	m_screenCollision();
+	m_screenCollision();
+	
 	m_body.update(d_time);
+	if (m_tied) {
+		m_body.setPosition(m_player->getShape().position - sf::Vector2f(0.f, m_player->getHalfSize().y) - sf::Vector2f(0.f, half_ball.y));
+	}
 }
 
 bool Ball::testCollision(const Shape& sh) {
@@ -54,13 +73,10 @@ bool Ball::testCollision(const Shape& sh) {
 		return false;
 	}
 	
-	text.setString("Half shape: " + std::to_string(half_ball.x) + " " + std::to_string(half_ball.y) + "\n"
-		+ "dx: " + std::to_string(dx) + " dy: " + std::to_string(dy) + "\n"
-		+ "px: " + std::to_string(px) + " py: " + std::to_string(py));
-	
 	
 	if (px < py) {
 		m_body.m_vel = sf::Vector2f(-m_body.m_vel.x, m_body.m_vel.y);
+		
 	}
 	else {
 		m_body.m_vel = sf::Vector2f(m_body.m_vel.x, -m_body.m_vel.y);
@@ -70,17 +86,25 @@ bool Ball::testCollision(const Shape& sh) {
 
 void Ball::draw(sf::RenderTarget& target, sf::RenderStates states) const {
 	target.draw(m_body);
-	target.draw(text);
 }
 
 void Ball::m_screenCollision() {
 	const Shape& ball = m_body.getShape();
-	const sf::Vector2f half_ball = (ball.world[1].position - ball.world[0].position) * 0.5f;
 	
-	if (ball.position.x + half_ball.x > m_win->getSize().x) {
-		m_body.m_vel = sf::Vector2f(-m_body.m_vel.x, m_body.m_vel.y);
+	if (ball.position.x + half_ball.x > m_view->getSize().x) {
+		m_body.m_vel.x = -m_body.m_vel.x;
+		m_body.m_shape.position.x = m_view->getSize().x - half_ball.x;
 	}
 	else if (ball.position.x - half_ball.x < 0.f) {
-		m_body.m_vel = sf::Vector2f(-m_body.m_vel.x, m_body.m_vel.y);
+		m_body.m_vel.x = -m_body.m_vel.x;
+		m_body.m_shape.position.x = half_ball.x;
+	}
+	if (ball.position.y + half_ball.y > m_view->getSize().y) {
+		m_tied = 1;
+		m_body.m_vel = sf::Vector2f(0.f, 0.f);
+	}
+	else if (ball.position.y - half_ball.y < 0.f) {
+		m_body.m_vel.y = -m_body.m_vel.y;
+		m_body.m_shape.position.y = half_ball.y;
 	}
 }

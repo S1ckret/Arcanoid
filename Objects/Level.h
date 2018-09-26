@@ -8,15 +8,16 @@
 
 #include "Brick.h"
 #include "Ball.h"
+#include "Player.h"
 
 class Level : public sf::Drawable{
 public:
 	Level();
-	Level(std::string filename);
+	Level(std::string filename, sf::View* view);
 	~Level();
 	
 	void load(std::string filename);
-	void setWindow(sf::RenderWindow* win);
+	void setView(sf::View* view);
 	
 	void handleInput();
 	void update(float d_time);
@@ -26,10 +27,9 @@ private:
 	// loadPlayerCfg();
 	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 private:
-	sf::RenderWindow* m_win;
+	sf::View* m_view;
 
 	std::vector<Brick* > m_bricks;
 	Ball m_ball;
-	// Player
-	// Ball
+	Player m_player;
 };

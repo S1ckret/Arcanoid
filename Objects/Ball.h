@@ -2,6 +2,7 @@
 
 #include "Body.h"
 #include "Shape.h"
+#include "Player.h"
 
 #include "SFML/Graphics.hpp"
 
@@ -12,9 +13,10 @@ public:
 	Ball();
 	~Ball();
 	
-	void setWindow(sf::RenderWindow* win);
-//	void tieToPlayer(Player& pl);
+	void setView(sf::View* view);
+	void setPlayer(Player* pl);
 	
+	void handleInput();
 	void update(float d_time);
 	bool testCollision(const Shape& sh);
 private:
@@ -22,9 +24,9 @@ private:
 	
 	void m_screenCollision();
 private:
-	sf::RenderWindow* m_win;
+	sf::View* m_view;
 	Body m_body;
-	
-	sf::Font font;
-	sf::Text text;
+	const sf::Vector2f half_ball = sf::Vector2f(7.5f, 7.5f);
+	bool m_tied;
+	Player* m_player;
 };

@@ -14,12 +14,13 @@ public:
 	
 	void setBorderBox(sf::VertexArray& va);
 	void setPosition(float x, float y);
-	
+	void setPosition(sf::Vector2f pos);
 	
 	void setColor(sf::Color cl);
 	
 	void setTexture(sf::Texture& tx);
 	void setTextureBox(sf::VertexArray& va);
+	void applyForce(sf::Vector2f force);
 	
 	void update(float d_time);
 	
@@ -34,7 +35,9 @@ private:
 	
 private:
 	friend class Ball;
+	friend class Player;
 	sf::Vector2f m_vel, m_acc;
+	sf::Vector2f m_force;
 	float m_d_time;
 	Shape m_shape;
 };

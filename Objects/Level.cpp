@@ -1,15 +1,18 @@
 #include "Level.h"
 
 Level::Level() {
-	
 }
 
 Level::~Level() {
 	
 }
 
-Level::Level(std::string filename) {
+Level::Level(std::string filename, sf::View* view) {
 	load(filename);
+	m_view = view;
+	m_ball.setView(m_view);
+	m_ball.setPlayer(&m_player);
+	m_player.setView(m_view);
 }
 
 void Level::load(std::string filename) {
@@ -37,26 +40,34 @@ void Level::load(std::string filename) {
 	out.close();
 }
 
-void Level::setWindow(sf::RenderWindow* win) {
-	m_win = win;
-	m_ball.setWindow(m_win);
+void Level::setView(sf::View* view) {
+	m_view = view;
+	m_ball.setView(m_view);
+	m_player.setView(m_view);
 }
 	
 void Level::handleInput() {
-	
+	m_ball.handleInput();
+	m_player.handleInput();
 }
 
 void Level::update(float d_time) {
-	for (int i = 0; i < m_bricks.size(); i++) {
-		if (m_bricks[i]->isAlive()) {
-			if (m_ball.testCollision(m_bricks[i]->getRectangle().getShape())) {
-				m_bricks[i]->minusLife();
+	m_ball.testCollision(m_player.getShape());
+	for (auto it = m_bricks.begin(); it != m_bricks.end(); ) {
+		if (m_ball.testCollision((*it)->getRectangle().getShape())) {
+			(*it)->minusLife();
+			if (!(*it)->isAlive()) {
+				m_bricks.erase(it);
+			} else {
+				it++;
 			}
+		} else {
+			it++;
 		}
 	}
-	m_ball.update(d_time);
-//	m_ball.testCollision(m_bricks[0]->getRectangle().getShape());
 	
+	m_player.update(d_time);
+	m_ball.update(d_time);
 }
 
 void Level::handleEvent(sf::Event event) {
@@ -68,4 +79,5 @@ void Level::draw(sf::RenderTarget& target, sf::RenderStates states) const {
 		target.draw(*m_bricks[i]);
 	}
 	target.draw(m_ball);
+	target.draw(m_player);
 }

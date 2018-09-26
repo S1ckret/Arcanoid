@@ -25,6 +25,11 @@ void Body::setBorderBox(sf::VertexArray& va) {
 	}
 }
 
+void Body::setPosition(sf::Vector2f pos) {
+	m_shape.position = pos;
+}
+
+
 void Body::setPosition(float x, float y) {
 	m_shape.position = sf::Vector2f(x, y);
 }
@@ -45,8 +50,15 @@ void Body::setTextureBox(sf::VertexArray& va) {
 	}
 }
 
+void Body::applyForce(sf::Vector2f force) {
+	m_force += force;
+}
+
 void Body::update(float d_time) {
 	m_d_time = d_time;
+	//f = ma // a = f/m (m = 1) => a = f;
+	m_acc += m_force;
+	m_force = sf::Vector2f(0.f, 0.f);
 	m_vel += m_acc * d_time;
 	m_shape.position += m_vel * d_time;
 	if (!m_shape.local.empty()) {
