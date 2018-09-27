@@ -17,6 +17,7 @@ public:
 	void setPosition(sf::Vector2f pos);
 	void setColor(sf::Color cl);
 	void setAcceleration(sf::Vector2f acc);
+	void setVelocity(sf::Vector2f vel);
 	
 	void setTexture(sf::Texture& tx);
 	void setTextureBox(sf::VertexArray& va);

@@ -3,11 +3,13 @@
 #include <string>
 #include <fstream>
 #include <vector>
+#include <iostream>
 
 #include "SFML/Graphics.hpp"
 
 #include "Brick.h"
 #include "Ball.h"
+#include "Body.h"
 #include "Player.h"
 
 class Level : public sf::Drawable{
@@ -29,6 +31,7 @@ private:
 	sf::View* m_view;
 
 	std::vector<Brick* > m_bricks;
+	std::vector<Body* > m_particles;
 	Ball m_ball;
 	Player m_player;
 	

@@ -30,7 +30,6 @@ private:
 	const float m_half_h = 10.f;
 	sf::View* m_view;
 	
-	sf::Font font;
-	sf::Text text;
+	
 
 };

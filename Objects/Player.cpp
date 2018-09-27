@@ -77,8 +77,6 @@ sf::Vector2f Player::getVelocity() {
 
 void Player::draw(sf::RenderTarget& target, sf::RenderStates states) const {
 	target.draw(m_body);
-	target.draw(text);
-
 }
 
 void Player::m_screenTestCollision() {

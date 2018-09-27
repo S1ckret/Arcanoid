@@ -42,6 +42,11 @@ void Body::setAcceleration(sf::Vector2f acc) {
 	m_acc = acc;
 }
 
+void Body::setVelocity(sf::Vector2f vel) {
+	m_vel = vel;
+}
+
+
 void Body::setTexture(sf::Texture& tx) {
 	
 }
